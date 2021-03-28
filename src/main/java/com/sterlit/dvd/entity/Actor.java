@@ -28,4 +28,12 @@ public class Actor extends AbstractEntity {
     @Column(name = "last_name", length = 45, nullable = false)
     private String lastName;
 
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
