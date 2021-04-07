@@ -1,12 +1,11 @@
 package com.sterlit.dvd.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import lombok.*;
+
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +17,7 @@ import java.util.Date;
 public class Actor extends AbstractEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id")
     private Long id;
 
@@ -28,12 +27,12 @@ public class Actor extends AbstractEntity {
     @Column(name = "last_name", length = 45, nullable = false)
     private String lastName;
 
-    @Override
-    public String toString() {
-        return "Actor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "film_actor",
+//            joinColumns = @JoinColumn(name = "actor_id"),
+//            inverseJoinColumns = @JoinColumn(name = "film_id"))
+//    private List<Film> films;
+
     }
-}

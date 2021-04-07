@@ -1,5 +1,7 @@
 package com.sterlit.dvd.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,11 +56,12 @@ public class Film extends AbstractEntity {
     @Column(name = "special_features")
     private Character[] specialFeatures;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "film_actor",
-            joinColumns = @JoinColumn(name = "actor_id"),
-            inverseJoinColumns = @JoinColumn(name = "film_id"))
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
     @ManyToMany(fetch = FetchType.LAZY)
