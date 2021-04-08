@@ -3,7 +3,10 @@ package com.sterlit.dvd.controller;
 import com.sterlit.dvd.dto.ActorDTO;
 import com.sterlit.dvd.entity.Actor;
 import com.sterlit.dvd.repo.ActorRepository;
+import com.sterlit.dvd.service.ActorService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +20,11 @@ import static com.sterlit.dvd.dto.ActorDTO.MapToView.mapActor;
 @RequestMapping("/actor")
 public class ActorController {
 
-   private ActorRepository actorRepository;
+   private ActorService actorService;
 
     @PostMapping("/create")
-    public Actor createNewActor(@RequestBody ActorDTO dto){
-       return actorRepository.save(mapActor.toEntity(dto));
+    public ResponseEntity<Boolean> createNewActor(@RequestBody ActorDTO dto){
+       return new ResponseEntity(actorService.createActor(dto), HttpStatus.OK);
 
     }
     @DeleteMapping("/delete/{id}")
