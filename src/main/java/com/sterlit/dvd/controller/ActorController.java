@@ -28,30 +28,28 @@ public class ActorController {
 
     }
     @DeleteMapping("/delete/{id}")
-    public String deleteActorById(@PathVariable Long id){
-         actorRepository.deleteById(id);
-         return  "Delete " + id;
+    public ResponseEntity<Boolean> deleteActorById(@PathVariable Long id){
+         return new ResponseEntity(actorService.deleteActor(id), HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public Actor findById(@PathVariable Long id){
-        return actorRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException(String.format("Актер с указаным ID %d не найден", id)));
+    public ResponseEntity<Actor> findById(@PathVariable Long id){
+        return new ResponseEntity(actorService.findById(id), HttpStatus.OK);
+
     }
     @GetMapping("/getbyfirstname")
-    public List<Actor> getActorByName(@RequestParam(name = "firstName") String firstName){
-        return actorRepository.findActorByFirstName(firstName);
+    public ResponseEntity<List<Actor>> findActorByFirstName(@RequestParam(name = "firstName") String firstName){
+        return new ResponseEntity(actorService.findActorByFirstName(firstName), HttpStatus.OK);
     }
     @GetMapping("/getbylastname")
-    public List<Actor> getActorByLastName(@RequestParam(name = "lastName") String lastName){
-        return actorRepository.findActorByLastName(lastName);
+    public ResponseEntity<List<Actor>> findActorByLastName(@RequestParam(name = "lastName") String lastName){
+        return new ResponseEntity(actorService.findActorByLastName(lastName), HttpStatus.OK);
     }
 
     @GetMapping
-    public List<ActorDTO> getAll() {
-       return actorRepository.findAll()
-                .stream()
-                .map(mapActor::toView).collect(Collectors.toList());
+    public ResponseEntity<List<ActorDTO>> getAll() {
+       return new ResponseEntity(actorService.getAll(), HttpStatus.OK);
+
     }
 
 }

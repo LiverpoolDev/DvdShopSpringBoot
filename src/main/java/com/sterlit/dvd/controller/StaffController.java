@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StaffController {
 
-    StaffRepository staffRepository;
+    private StaffRepository staffRepository;
 
     @GetMapping("/get/{id}")
-    public Staff findById(@PathVariable Long id){
+    public Staff findById(@PathVariable Long id) {
         return staffRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException(String.format("Персонал с указаным ID %d не найден", id)));
+                .orElseThrow(() -> new RuntimeException(String.format("Персонал с указаным ID %d не найден", id)));
     }
 
 }

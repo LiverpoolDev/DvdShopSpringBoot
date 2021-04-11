@@ -11,7 +11,11 @@ import java.util.List;
 public interface ActorRepository extends JpaRepository<Actor, Long> {
     List<Actor> findActorByFirstName(String firstName);
 
+    List<Actor> findAll();
+
     List<Actor> findActorByLastName(String lastName);
+
     Actor findActorByFirstNameAndLastName(String firstName, String lastName);
+
 
 }
